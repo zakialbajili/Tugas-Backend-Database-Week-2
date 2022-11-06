@@ -17,5 +17,11 @@ class _response{
             return false
         }
     }
+    errorHandler(err, req, res, next){
+        res.status(500).send({
+            status:false,
+            error:err
+        })
+    }
 }
-module.exports=new _response()
+module.exports= new _response()

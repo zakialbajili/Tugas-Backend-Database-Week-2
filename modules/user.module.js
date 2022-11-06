@@ -20,7 +20,6 @@ class _user{
                 }
             }
             const password=bcrypt.hashSync(body.password, 10)
-            console.log(body.password, password)
             const add=await prisma.user.create({
                 data:{
                     name: body.name,

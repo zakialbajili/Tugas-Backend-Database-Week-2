@@ -1,16 +1,20 @@
 const m$todo = require('../modules/todo.module')
 const {Router}= require('express')
 const response =require('../helpers/response')
+const userSession =require('../helpers/middleware')
 const todoController = Router()
 
 //http://localhost:8000/api/todo/add
-todoController.post('/add', async (req, res)=>{
-    const add= await m$todo.createTodo(req.body)
+todoController.post('/add', userSession, async (req, res)=>{
+    const add= await m$todo.createTodo({
+        user_id:req.user.id,
+        description: req.body.description
+    })
     response.sendResponse(res, add)
 })
 //http://localhost:8000/api/todo/:id
-todoController.get('/list/:id', async (req, res)=>{
-    const list= await m$todo.listTodo(Number(req.params.id))
+todoController.get('/list', userSession, async (req, res)=>{
+    const list= await m$todo.listTodo({user_id:req.user.id})
     response.sendResponse(res, list)
 })
 todoController.put('/update/:id', async (req, res)=>{
