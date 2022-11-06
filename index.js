@@ -6,6 +6,7 @@ const cors=require('cors')
 //const m$user=require('./modules/user.module')
 //const prisma = require('./helpers/database')
 const routes = require('./routes')
+const response = require('./helpers/response')
 const app = express()
 const port = 8000
 
@@ -18,7 +19,10 @@ app.get('/', async(req, res)=>{
         message:"Hello this is API from Express Tutorial"
     })
 })
+//routes API
 routes(app)
+//
+app.use(response.errorHandler)
 /*app.post('/add', async(req, res)=>{
     const add= await m$user.createUser(req.body)
     res.json(add)

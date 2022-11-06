@@ -8,8 +8,8 @@ class _todo{
             const schema=Joi.object({
                 user_id:Joi.number().required(),
                 description:Joi.string().required(),
-            })
-            const validation=schema.validate(body)
+            }).options({abortEarly: false })
+            const validation=schema.validate(body, {convert: false})
             if(validation.error){
                 const errorDetails=validation.error.details.map(detail=>detail.message)
                 return{
@@ -22,11 +22,11 @@ class _todo{
                 data:{
                     user_id: body.user_id,
                     description:body.description,
-                    complete:0
                 }
             })
             return{
                 status:true,
+                code:201,
                 data:add
             }
         }
@@ -39,10 +39,13 @@ class _todo{
             }
         }
     }
-    listTodo = async(id)=>{
+    listTodo = async(body)=>{
         try{
-            const schema=Joi.number().required()
-            const validation=schema.validate(id)
+             //validation input
+             const schema=Joi.object({
+                user_id:Joi.number().required()
+            }).options({abortEarly: false })
+            const validation=schema.validate(body, {convert: false})
             if(validation.error){
                 const errorDetails=validation.error.details.map(detail=>detail.message)
                 return{
@@ -51,9 +54,9 @@ class _todo{
                     error:errorDetails.join(',')
                 }
             }
-            const list = await prisma.todo.findUnique({
+            const list = await prisma.todo.findMany({
                 where:{
-                    id: id
+                    user_id:body.user_id
                 }
             })
             return{
