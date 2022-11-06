@@ -36,7 +36,7 @@ class _auth{
             //handle bcrypt compare
             if(!bcrypt.compareSync(body.password, user.password)){
                 return{
-                    status:true,
+                    status:false,
                     code:401,
                     error:"Wrong Password"
                 }
