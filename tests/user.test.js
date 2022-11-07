@@ -8,7 +8,7 @@ afterAll((done) => {
 
 describe("User", () => {
   Test("List User", async () => {
-    const res = await request(app)._getFormData("/api/user");
+    const res = await request(app).get("/api/users");
     expect(res.status).toBe(200);
   });
 });
