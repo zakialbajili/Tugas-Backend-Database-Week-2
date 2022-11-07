@@ -1,6 +1,7 @@
 # Tugas-Backend-Database-Week-2
-# Tutorial Pengunaan
-  1. Clone repo ini
-  2. Buat database baru di local
-  3. Sesuaikan url file env dengan url database yang barudibuat
-  4. Buka terminal dan ketik "npm run dev" atau "npm run start" untuk menjalankannya
+# kelompok 3
+# anggota kelompok
+1. BAGAS ARYA SAPUTRA
+2. ZAKY MAULANA AL BAJILI
+3. Dwi Karunia Fitria Ningrum
+4. KRISTIAWAN
