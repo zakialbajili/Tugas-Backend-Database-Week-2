@@ -92,8 +92,8 @@ class _user{
                 name:Joi.string(),
                 email:Joi.string(),
                 password:Joi.string(),
-            })
-            const validation=schema.validate(body)
+            }).options({abortEarly: false })
+            const validation=schema.validate(body, {convert: false})
             if(validation.error){
                 const errorDetails=validation.error.details.map(detail=>detail.message)
                 return{
