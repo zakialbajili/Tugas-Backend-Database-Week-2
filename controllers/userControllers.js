@@ -1,6 +1,7 @@
 const m$user = require('../modules/user.module')
 const {Router}= require('express')
 const response =require('../helpers/response')
+const userSession = require('../helpers/middleware')
 const userController = Router()
 //GET
 //POST
@@ -23,8 +24,10 @@ userController.delete('/:id', async (req, res)=>{
     const deleteUser= await m$user.deleteUser(Number(req.params.id))
     response.sendResponse(res, deleteUser)
 })
-userController.put('/update', async (req, res)=>{
-    const updateUser= await m$user.updateUser(req.body)
+userController.put('/update', userSession, async (req, res)=>{
+    const updateUser= await m$user.updateUser({
+        id:req.user.id
+    }, req.body)
     response.sendResponse(res, updateUser)
 })
 //http://localhost:8000/api/users/
